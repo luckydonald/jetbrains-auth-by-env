@@ -3,7 +3,6 @@ package com.github.intfish123.authbyenv;
 import com.intellij.database.access.DatabaseCredentials;
 import com.intellij.database.dataSource.DatabaseAuthProvider;
 import com.intellij.database.dataSource.DatabaseConnectionConfig;
-import com.intellij.database.dataSource.LocalDataSource;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.EnvironmentUtil;
@@ -67,7 +66,6 @@ public class AuthByEnvDatabaseAuthProvider implements DatabaseAuthProvider {
             password = DEFAULT_ENV_PASSWORD;
         }
         password = password.replace("$", "");
-        String val = EnvironmentUtil.getValue(password);
-        return val;
+        return EnvironmentUtil.getValue(password);
     }
 }

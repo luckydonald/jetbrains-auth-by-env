@@ -15,9 +15,9 @@ import javax.swing.*;
 import static com.intellij.database.dataSource.url.ui.UrlPropertiesPanel.createLabelConstraints;
 
 public class AuthByEnvWidget implements DatabaseAuthProvider.AuthWidget {
-    private JPanel panel;
-    private JBTextField usernameText;
-    private JBTextField passwordText;
+    private final JPanel panel;
+    private final JBTextField usernameText;
+    private final JBTextField passwordText;
 
     public AuthByEnvWidget() {
         panel = new JPanel(new GridLayoutManager(3, 6));
