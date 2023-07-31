@@ -1,18 +1,19 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <id>com.github.intfish123.authbyenv</id>
-    <name>auth-by-env Template</name>
+    <name>auth-by-env</name>
     <vendor>intfish123</vendor>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.database</depends>
 
-    <resource-bundle>messages.MyBundle</resource-bundle>
+    <resource-bundle>messages.i18n</resource-bundle>
 
-    <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.intfish123.authbyenv.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
+    <extensions defaultExtensionNs="com.intellij.database">
+        <connectionInterceptor implementation="com.github.intfish123.authbyenv.AuthByEnvDatabaseAuthProvider"></connectionInterceptor>
     </extensions>
 
-    <applicationListeners>
-        <listener class="com.github.intfish123.authbyenv.listeners.MyApplicationActivationListener" topic="com.intellij.openapi.application.ApplicationActivationListener"/>
-    </applicationListeners>
+    <!--<applicationListeners>
+        <listener class="com.github.intfish123.authbyenv.listeners.AuthByEnvActivationListener" topic="com.intellij.openapi.application.ApplicationActivationListener"/>
+    </applicationListeners>-->
 </idea-plugin>
