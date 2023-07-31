@@ -40,11 +40,6 @@ public class AuthByEnvDatabaseAuthProvider implements DatabaseAuthProvider {
     }
 
     @Override
-    public boolean isApplicable(@NotNull LocalDataSource dataSource, @NotNull ApplicabilityLevel level) {
-        return true;
-    }
-
-    @Override
     public @Nullable CompletionStage<@NotNull ProtoConnection> intercept(@NotNull ProtoConnection protoConnection, boolean b) {
         String username = getUsername(protoConnection);
         String password = getPassword(protoConnection);
