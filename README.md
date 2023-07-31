@@ -5,7 +5,7 @@
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)
 
 <!-- Plugin description -->
-Get `user` and `password` from `environment` for connecting Datasource.
+Get `user` and `password` from `environment`, then connecting Datasource.
 <!-- Plugin description end -->
 
 ## Installation
