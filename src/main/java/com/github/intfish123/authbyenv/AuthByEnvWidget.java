@@ -7,7 +7,6 @@ import com.intellij.database.dataSource.url.template.MutableParametersHolder;
 import com.intellij.database.dataSource.url.template.ParametersHolder;
 import com.intellij.ui.components.JBLabel;
 import com.intellij.ui.components.JBTextField;
-import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import org.jetbrains.annotations.NotNull;
 
