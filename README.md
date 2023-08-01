@@ -1,8 +1,8 @@
 # auth-by-env
 
 ![Build](https://github.com/intfish123/auth-by-env/workflows/Build/badge.svg)
-[![Version](https://img.shields.io/jetbrains/plugin/v/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)
-[![Downloads](https://img.shields.io/jetbrains/plugin/d/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)
+[![Version](https://img.shields.io/jetbrains/plugin/v/22397.svg)](https://plugins.jetbrains.com/plugin/22397)
+[![Downloads](https://img.shields.io/jetbrains/plugin/d/22397.svg)](https://plugins.jetbrains.com/plugin/22397)
 
 <!-- Plugin description -->
 Get `user` and `password` from `environment`, then connecting Datasource.

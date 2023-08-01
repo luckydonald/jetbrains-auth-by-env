@@ -171,6 +171,10 @@ jobs:
     needs: [ build, test, inspectCode ]
     runs-on: ubuntu-latest
     steps:
+      # Free GitHub Actions Environment Disk Space
+      - name: Maximize Build Space
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
 
       # Check out current repository
       - name: Fetch Sources
