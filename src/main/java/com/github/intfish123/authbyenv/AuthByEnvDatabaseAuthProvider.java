@@ -38,8 +38,8 @@ public class AuthByEnvDatabaseAuthProvider implements DatabaseAuthProvider {
     }
 
     @Override
-    public boolean isApplicable(@NotNull LocalDataSource dataSource, @NotNull ApplicabilityLevel level) {
-        return true;
+    public ApplicabilityLevel.@NotNull Result getApplicability(@NotNull DatabaseConnectionPoint point, @NotNull ApplicabilityLevel level) {
+        return ApplicabilityLevel.Result.APPLICABLE;
     }
 
     @Override
