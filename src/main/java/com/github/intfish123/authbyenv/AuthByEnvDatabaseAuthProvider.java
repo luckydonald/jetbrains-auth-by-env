@@ -37,7 +37,6 @@ public class AuthByEnvDatabaseAuthProvider implements DatabaseAuthProvider {
         return new AuthByEnvWidget();
     }
 
-    @SuppressWarnings("all")
     @Override
     public boolean isApplicable(@NotNull LocalDataSource dataSource, @NotNull ApplicabilityLevel level) {
         return true;
