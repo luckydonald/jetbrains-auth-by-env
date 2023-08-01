@@ -5,7 +5,21 @@
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/22397.svg)](https://plugins.jetbrains.com/plugin/22397)
 
 <!-- Plugin description -->
-Get `user` and `password` from `environment`, then connecting Datasource.
+Get `user` and `password` from `environment variables`, then connecting Datasource.
+
+## Getting Start
+### Step 1: Config your environment variables
+
+Examples:
+```
+echo "export DB_USERNAME=your-username" >> ~/.zshrc
+echo "export DB_PASSWORD=your-password" >> ~/.zshrc
+```
+
+### Step 2: Install this plugin and config datasource
+switch `Authentication:` to `Auth By Env`
+
+
 <!-- Plugin description end -->
 
 ## Installation
