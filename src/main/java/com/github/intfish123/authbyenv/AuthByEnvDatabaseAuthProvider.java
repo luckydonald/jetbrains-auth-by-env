@@ -44,31 +44,6 @@ public class AuthByEnvDatabaseAuthProvider implements DatabaseAuthProvider {
     }
 
     @Override
-    public @Nullable Object loadAuthConfig(@NotNull DatabaseConnectionPoint point, @Nullable DatabaseCredentials credentials, boolean external) {
-        return DatabaseAuthProvider.super.loadAuthConfig(point, credentials, external);
-    }
-
-    @Override
-    public void saveAuthConfig(@NotNull DatabaseConnectionConfig config, @Nullable DatabaseCredentials credentials, @Nullable Object data, boolean external) {
-        DatabaseAuthProvider.super.saveAuthConfig(config, credentials, data, external);
-    }
-
-    @Override
-    public void setNewPassword(ProtoConnection proto, String newPass) {
-        DatabaseAuthProvider.super.setNewPassword(proto, newPass);
-    }
-
-    @Override
-    public @Nullable CompletionStage<ProtoConnection> handleConnectionFailure(@NotNull ProtoConnection proto, @NotNull Throwable e, boolean silent, int attempt) {
-        return DatabaseAuthProvider.super.handleConnectionFailure(proto, e, silent, attempt);
-    }
-
-    @Override
-    public @Nullable CompletionStage<?> handleConnected(@NotNull DatabaseConnection connection, @NotNull ProtoConnection proto) {
-        return DatabaseAuthProvider.super.handleConnected(connection, proto);
-    }
-
-    @Override
     public @Nullable CompletionStage<@NotNull ProtoConnection> intercept(@NotNull ProtoConnection protoConnection, boolean b) {
         String username = getUsername(protoConnection);
         String password = getPassword(protoConnection);
