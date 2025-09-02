@@ -5,55 +5,34 @@ import com.intellij.database.dataSource.DatabaseConnectionConfig;
 import com.intellij.database.dataSource.DatabaseConnectionPoint;
 import com.intellij.database.dataSource.url.template.MutableParametersHolder;
 import com.intellij.database.dataSource.url.template.ParametersHolder;
-import com.intellij.openapi.externalSystem.service.ui.project.path.WorkingDirectoryField;
 import com.intellij.openapi.project.ProjectManager;
-import com.intellij.openapi.ui.TextComponentAccessor;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.TextFieldWithHistory;
 import com.intellij.ui.TextFieldWithHistoryWithBrowseButton;
 import com.intellij.ui.components.JBLabel;
 import com.intellij.ui.components.JBTextField;
-import com.intellij.ui.components.fields.ExtendableTextField;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.ui.SwingHelper;
-import com.jetbrains.JBRFileDialog;
 import de.luckydonald.authbyenv.EnvFileType;
 import org.jetbrains.annotations.NotNull;
 
-import com.intellij.execution.configuration.EnvironmentVariablesTextFieldWithBrowseButton;
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
-import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.io.FileUtil;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.search.FileTypeIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.ProjectScope;
-import com.intellij.ui.TextFieldWithHistory;
-import com.intellij.ui.TextFieldWithHistoryWithBrowseButton;
-import com.intellij.ui.components.JBTextField;
-import com.intellij.util.Function;
 import com.intellij.util.NotNullProducer;
-import com.intellij.util.containers.ContainerUtil;
-import com.intellij.util.ui.FormBuilder;
-import com.intellij.util.ui.StatusText;
-import com.intellij.util.ui.UIUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import java.awt.*;
+import java.util.List;
 
-import static com.intellij.database.dataSource.url.ui.UrlPropertiesPanel.createLabelConstraints;
-
+@SuppressWarnings("UnstableApiUsage")
 public class AuthByEnvWidget implements DatabaseAuthProvider.AuthWidget {
     private final JPanel panel;
     private final JBTextField usernameText;
@@ -90,17 +69,12 @@ public class AuthByEnvWidget implements DatabaseAuthProvider.AuthWidget {
         final TextFieldWithHistory textFieldWithHistory = textFieldWithHistoryWithBrowseButton.getChildComponent();
         textFieldWithHistory.setHistorySize(-1);
         textFieldWithHistory.setMinimumAndPreferredWidth(0);
-        SwingHelper.addHistoryOnExpansion(textFieldWithHistory, new NotNullProducer<List<String>>() {
+        SwingHelper.addHistoryOnExpansion(textFieldWithHistory, new NotNullProducer<>() {
             @NotNull
             @Override
             public List<String> produce() {
                 List<VirtualFile> newFiles = listPossibleConfigFilesInProject(project);
-                List<String> newFilePaths = ContainerUtil.map(newFiles, new Function<VirtualFile, String>() {
-                    @Override
-                    public String fun(VirtualFile file) {
-                        return FileUtil.toSystemDependentName(file.getPath());
-                    }
-                });
+                List<String> newFilePaths = ContainerUtil.map(newFiles, file -> FileUtil.toSystemDependentName(file.getPath()));
                 Collections.sort(newFilePaths);
                 return newFilePaths;
             }
@@ -120,9 +94,9 @@ public class AuthByEnvWidget implements DatabaseAuthProvider.AuthWidget {
     private static List<VirtualFile> listPossibleConfigFilesInProject(@NotNull Project project) {
         GlobalSearchScope scope = ProjectScope.getContentScope(project);
         Collection<VirtualFile> files = FileTypeIndex.getFiles(EnvFileType.INSTANCE, scope);
-        List<VirtualFile> result = ContainerUtil.newArrayList();
+        List<VirtualFile> result = new ArrayList<>();
         for (VirtualFile file : files) {
-            if (file != null) {
+            if (file == null) {
                 continue;
             }
             if (! file.isValid()) {
@@ -163,9 +137,9 @@ public class AuthByEnvWidget implements DatabaseAuthProvider.AuthWidget {
 
     @Override
     public void reset(@NotNull DatabaseConnectionPoint point, boolean resetCredentials) {
-        usernameText.setText(point.getAdditionalProperty(AuthByEnvDatabaseAuthProvider.PROP_USERNAME));
-        passwordText.setText(point.getAdditionalProperty(AuthByEnvDatabaseAuthProvider.PROP_PASSWORD));
-        filepathText.setText(point.getAdditionalProperty(AuthByEnvDatabaseAuthProvider.PROP_FILEPATH));
+        usernameText.setText(Optional.ofNullable(point.getAdditionalProperty(AuthByEnvDatabaseAuthProvider.PROP_USERNAME)).orElse(""));
+        passwordText.setText(Optional.ofNullable(point.getAdditionalProperty(AuthByEnvDatabaseAuthProvider.PROP_PASSWORD)).orElse(""));
+        filepathText.setText(Optional.ofNullable(point.getAdditionalProperty(AuthByEnvDatabaseAuthProvider.PROP_FILEPATH)).orElse(""));
     }
 
     @Override
